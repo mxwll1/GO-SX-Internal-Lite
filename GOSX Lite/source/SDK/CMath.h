@@ -22,6 +22,13 @@
 #define DEG2RAD(x)  ((float)(x) * (float)(M_PI_F / 180.f))
 #define RAD2DEG(x)  ((float)(x) * (float)(180.f/M_PI_F))
 
+enum
+{
+    PITCH = 0,	// up / down
+    YAW,		// left / right
+    ROLL		// fall over
+};
+
 class CMath
 {
 public:
@@ -31,6 +38,7 @@ public:
     static void inline SinCos(float radians, float *sine, float *cosine);
     static void AngleVectors(const QAngle &angles, Vector *forward);
     static void AngleVectors(const Vector &angles, Vector *forward, Vector *right, Vector *up);
+    static void AngleVectors(const QAngle &angles, Vector& forward);
     static float DotProduct(Vector &v1, float* v2);
     static float Dot(const Vector &v1, Vector &v2);
     static void VectorTransform(Vector &in1, matrix3x4_t& in2, Vector &out);

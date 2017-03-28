@@ -21,36 +21,54 @@ void CTriggerBot::apply(CUserCmd *pCmd) {
         if (!active_weapon || active_weapon->GetAmmo() == 0 || !CWeaponManager::IsValidWeapon(active_weapon->GetWeaponEntityID())) {
             return;
         }
-        
-        for(int index = 1; index < Interfaces::Engine()->GetMaxClients(); index++) {
-            if (index == Interfaces::Engine()->GetLocalPlayer()) {
-                continue;
+
+        Vector traceStart, traceEnd;
+
+        QAngle viewAngles;
+        Interfaces::Engine()->GetViewAngles(viewAngles);
+        QAngle viewAngles_rcs = viewAngles + (LocalPlayer->AimPunch() * 2.0f);
+
+        CMath::AngleVectors(viewAngles_rcs, traceEnd);
+
+        traceStart = LocalPlayer->GetEyePos();
+        traceEnd = traceStart + (traceEnd * 8192.0f);
+
+        Ray_t ray;
+        trace_t trace;
+        CTraceFilter filter;
+        filter.pSkip = LocalPlayer;
+
+        ray.Init(traceStart, traceEnd);
+        Interfaces::EngineTrace()->TraceRay(ray, MASK_SHOT, &filter, &trace);
+
+        if (trace.allsolid || trace.startsolid) {
+            return;
+        }
+
+        C_CSPlayer* player = (C_CSPlayer*)trace.m_pEnt;
+        if(!player || !player->IsValidLivePlayer() || player->GetImmune()) {
+            return;
+        }
+
+        if(player->GetClientClass()->m_ClassID != EClassIds::CCSPlayer) {
+            return;
+        }
+
+        if(LocalPlayer->GetTeamNum() == player->GetTeamNum()) {
+            return;
+        }
+
+        if (active_weapon->NextPrimaryAttack() > Interfaces::GlobalVars()->curtime) {
+            if (active_weapon->GetWeaponEntityID() == weapon_revolver) {
+                pCmd->buttons &= ~IN_ATTACK2;
+            } else {
+                pCmd->buttons &= ~IN_ATTACK;
             }
-            
-            C_CSPlayer* entity = C_CSPlayer::GetEntity(index);
-            if (!entity || !entity->IsValidLivePlayer() || entity->GetImmune()) {
-                continue;
-            }
-            
-            for (int hb = 0; hb < HITBOX_RIGHT_THIGH; hb++) {
-                if (entity->CanHit(LocalPlayer, hb)) {
-                    if (active_weapon->NextPrimaryAttack() > Interfaces::GlobalVars()->curtime)
-                    {
-                        if (active_weapon->GetWeaponEntityID() == weapon_revolver) {
-                            pCmd->buttons &= ~IN_ATTACK2;
-                        } else {
-                            pCmd->buttons &= ~IN_ATTACK;
-                        }
-                    }
-                    else
-                    {
-                        if (active_weapon->GetWeaponEntityID() == weapon_revolver) {
-                            pCmd->buttons |= IN_ATTACK2;
-                        } else {
-                            pCmd->buttons |= IN_ATTACK;
-                        }
-                    }
-                }
+        } else {
+            if (active_weapon->GetWeaponEntityID() == weapon_revolver) {
+                pCmd->buttons |= IN_ATTACK2;
+            } else {
+                pCmd->buttons |= IN_ATTACK;
             }
         }
     }

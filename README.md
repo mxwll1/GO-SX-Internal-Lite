@@ -27,6 +27,7 @@ ___
 - Open GO:SX Lite Workspace,
 - Fix the Settings,
 - Build the dylib, osxinj and bootstrap.dylib (all files incl.)
+- Copy the Files `settings.ini`, `menu.ini` and `weapons.ini` from Engine folder to the `gosx.dylib` folder.
 
 ___
 

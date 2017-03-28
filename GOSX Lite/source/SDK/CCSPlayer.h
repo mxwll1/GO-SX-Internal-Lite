@@ -109,7 +109,7 @@ public:
 
     bool IsValidLivePlayer()
     {
-        return !IsDormant() && GetHealth() > 0 && IsAlive();
+        return !IsDormant() && IsAlive();
     }
 
     C_BaseCombatWeapon* GetActiveWeapon()
@@ -305,13 +305,24 @@ public:
         {
             return false;
         }
+
+        Vector traceStart, traceEnd;
+
+        QAngle viewAngles;
+        Interfaces::Engine()->GetViewAngles(viewAngles);
+        QAngle viewAngles_rcs = viewAngles + LocalPlayer->AimPunch() * 2.0f;
+
+        CMath::AngleVectors(viewAngles_rcs, &traceEnd);
+
+        traceStart = LocalPlayer->GetEyePos();
+        traceEnd = traceStart + (traceEnd * 8192.0f);
         
         Ray_t ray;
         trace_t trace;
         CTraceFilter filter;
         filter.pSkip = LocalPlayer;
         
-        ray.Init(LocalPlayer->GetEyePos(), GetHitboxPosition(hitbox));
+        ray.Init(traceStart, traceEnd);
         Interfaces::EngineTrace()->TraceRay(ray, MASK_SHOT, &filter, &trace);
         
         if (trace.allsolid || trace.startsolid) {
@@ -320,7 +331,12 @@ public:
         
         if (trace.m_pEnt)
         {
-            if (trace.m_pEnt == this && trace.fraction >= 1.0f)
+            if (
+                trace.m_pEnt == this &&
+                trace.hitbox == hitbox &&
+                trace.DidHitNonWorldEntity() &&
+                this->EntIndex() == trace.GetEntityIndex()
+            )
             {
                 return true;
             }

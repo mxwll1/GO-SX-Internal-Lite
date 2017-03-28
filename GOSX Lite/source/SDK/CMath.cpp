@@ -13,6 +13,18 @@ void CMath::SinCos(float radians, float *sine, float *cosine) {
     *cosine = cos(radians);
 }
 
+void CMath::AngleVectors(const QAngle &angles, Vector& forward)
+{
+    float sp, sy, cp, cy;
+
+    CMath::SinCos(DEG2RAD(angles[YAW]), &sy, &cy);
+    CMath::SinCos(DEG2RAD(angles[PITCH]), &sp, &cp);
+
+    forward.x = cp * cy;
+    forward.y = cp * sy;
+    forward.z = -sp;
+}
+
 void CMath::AngleVectors(const QAngle &angles, Vector *forward) {
     float sr, sp, sy, cr, cp, cy;
     
