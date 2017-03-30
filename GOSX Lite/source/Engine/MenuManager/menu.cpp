@@ -8,6 +8,7 @@
 
 #include "menu.h"
 #include "KeyStroke.h"
+#include "Engine/FeatureManager/Features/Aim.h"
 
 CHackMenu* CHackMenu::instance = nullptr;
 
@@ -276,6 +277,10 @@ void CHackMenu::AddMenuItem(const char *section, const char* key, int col, int r
     } else if (type == FieldType_t::FIELDTYPE_SELECT) {
         std::map<int, const char*> list;
         std::map<int, const char*> values;
+        if(!strcmp(section, "AimHelper")) {
+            list = CAim::GetBoneList();
+            values = CAim::GetBoneValues();
+        }
         DrawSelectField(section, key, ButtonBaseX, ButtonBaseY, INIGET_INT(section, key), list, values);
     }
 

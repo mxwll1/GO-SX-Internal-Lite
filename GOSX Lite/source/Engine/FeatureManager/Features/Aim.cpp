@@ -11,14 +11,50 @@
 
 CAim::CAim() {}
 
+std::map<int, const char*> CAim::GetBoneList() {
+    std::map<int, const char*> select;
+
+    select[0] = "0"; // HITBOX_HEAD
+    select[1] = "1"; // HITBOX_NECK
+    select[2] = "2"; // HITBOX_LOWER_NECK
+    select[3] = "3"; // HITBOX_PELVIS
+    select[4] = "4"; // HITBOX_BODY
+    select[5] = "5"; // HITBOX_THORAX
+    select[6] = "6"; // HITBOX_CHEST
+    select[7] = "7"; // HITBOX_UPPER_CHEST
+
+    return select;
+}
+
+std::map<int, const char*> CAim::GetBoneValues() {
+    std::map<int, const char*> values;
+
+    values[0] = "HEAD";
+    values[1] = "NECK";
+    values[2] = "LOWER NECK";
+    values[3] = "PELVIS";
+    values[4] = "BODY";
+    values[5] = "THORAX";
+    values[6] = "CHEST";
+    values[7] = "UPPER CHEST";
+
+    return values;
+}
+
 void CAim::CreateMove(CUserCmd *pCmd) {
     C_CSPlayer* LocalPlayer = C_CSPlayer::GetLocalPlayer();
     if(!LocalPlayer || !LocalPlayer->IsValidLivePlayer()) {
+        if(LockedTargetEntity) {
+            Reset();
+        }
         return;
     }
 
     C_BaseCombatWeapon* currentWeapon = LocalPlayer->GetActiveWeapon();
     if(!currentWeapon) {
+        if(LockedTargetEntity) {
+            Reset();
+        }
         return;
     }
 
@@ -29,6 +65,9 @@ void CAim::CreateMove(CUserCmd *pCmd) {
         CWeaponManager::isGrenade(currentWeaponID) ||
         CWeaponManager::isNonAimWeapon(currentWeaponID)
     ) {
+        if(LockedTargetEntity) {
+            Reset();
+        }
         return;
     }
 
@@ -42,11 +81,22 @@ void CAim::CreateMove(CUserCmd *pCmd) {
             currentWeaponID == EItemDefinitionIndex::weapon_revolver
         )
     ) {
+        if(LockedTargetEntity) {
+            Reset();
+        }
         return;
     }
 
-    C_CSPlayer* TargetEntity = FindTarget(LocalPlayer);
+    C_CSPlayer* TargetEntity = nullptr;
+    if(!LockedTargetEntity) {
+        TargetEntity = FindTarget(LocalPlayer);
+    } else {
+        TargetEntity = LockedTargetEntity;
+    }
     if(!TargetEntity || !TargetEntity->IsValidLivePlayer()) {
+        if(LockedTargetEntity) {
+            Reset();
+        }
         return;
     }
 
@@ -70,7 +120,7 @@ C_CSPlayer* CAim::FindTarget(C_CSPlayer* LocalPlayer) {
             continue;
         }
 
-        Vector PossibleTargetHitbox = PossibleTarget->GetPredictedPosition(HITBOX_NECK);
+        Vector PossibleTargetHitbox = PossibleTarget->GetPredictedPosition(INIGET_INT("AimHelper", "aim_hitbox"));
         if(INIGET_BOOL("AimHelper", "visibility_check") && !PossibleTarget->IsVisible(LocalPlayer, PossibleTargetHitbox)) {
             continue;
         }
@@ -92,7 +142,7 @@ void CAim::StartAim(C_CSPlayer* LocalPlayer, C_CSPlayer* AimTarget, CUserCmd* pC
     float oldForward = pCmd->forwardmove;
     float oldSideMove = pCmd->sidemove;
 
-    Vector TargetHitbox = AimTarget->GetPredictedPosition(HITBOX_NECK);
+    Vector TargetHitbox = AimTarget->GetPredictedPosition(INIGET_INT("AimHelper", "aim_hitbox"));
     Vector dir = LocalPlayer->GetEyePos() - TargetHitbox;
     
     CMath::VectorNormalize(dir);
@@ -113,6 +163,10 @@ void CAim::StartAim(C_CSPlayer* LocalPlayer, C_CSPlayer* AimTarget, CUserCmd* pC
             }
         }
     }
+}
+
+void CAim::Reset() {
+    LockedTargetEntity = nullptr;
 }
 
 void CAim::RCS(QAngle& angle, C_CSPlayer* LocalPlayer, C_CSPlayer* TargetEntity, CUserCmd* pCmd) {
