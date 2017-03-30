@@ -5,6 +5,7 @@ ___
 
 ### Features
 
+- Basic Aimbot (w/ RCS, Smooth, Silent Aim)
 - Chams
 - Box ESP (Healthbar & Name)
 - Triggerbot
