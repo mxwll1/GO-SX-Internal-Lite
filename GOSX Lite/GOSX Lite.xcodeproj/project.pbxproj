@@ -107,6 +107,7 @@
 		D88F3F021E5C0A8100C00A4A /* Esp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D88F3F001E5C0A8100C00A4A /* Esp.cpp */; };
 		D88F3F031E5C0A8100C00A4A /* Esp.h in Headers */ = {isa = PBXBuildFile; fileRef = D88F3F011E5C0A8100C00A4A /* Esp.h */; };
 		D8A5BC541E80384D00DCAA8D /* IClientEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8A5BC531E80384D00DCAA8D /* IClientEntity.cpp */; };
+		D8B39C1F1E8AEA470002F2EC /* settings.ini in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8B39C1E1E8AEA400002F2EC /* settings.ini */; };
 		D8B6DC5A1E5C8EB000A14926 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8B6DC581E5C8EB000A14926 /* Logger.cpp */; };
 		D8B6DC5B1E5C8EB000A14926 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6DC591E5C8EB000A14926 /* Logger.h */; };
 		D8BBFF681E5EED870028DA53 /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8BBFF651E5EED690028DA53 /* settings.cpp */; };
@@ -116,8 +117,9 @@
 		D8BBFF6C1E5EED9E0028DA53 /* SimpleIni.h in Headers */ = {isa = PBXBuildFile; fileRef = D8BBFF671E5EED690028DA53 /* SimpleIni.h */; };
 		D8BDFCCA1E64805600F51DC0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8BDFCC91E64805600F51DC0 /* Utils.cpp */; };
 		D8CFCCF21E76FCD20018CD32 /* menu.ini in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8CFCCF11E76F6F00018CD32 /* menu.ini */; };
-		D8D74E851E5F198F008D0D13 /* settings.ini in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8BBFF6D1E5EF55C0028DA53 /* settings.ini */; };
 		D8D846551E7300ED00EA1BB7 /* KeyValues.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D846541E7300ED00EA1BB7 /* KeyValues.h */; };
+		D8D95F0E1E8CC252006A1A58 /* Aim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8D95F0C1E8CC252006A1A58 /* Aim.cpp */; };
+		D8D95F0F1E8CC252006A1A58 /* Aim.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D95F0D1E8CC252006A1A58 /* Aim.h */; };
 		D8E1C3861E6851F800F2F9E3 /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8E1C3841E6851F800F2F9E3 /* menu.cpp */; };
 		D8E1C3871E6851F800F2F9E3 /* menu.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E1C3851E6851F800F2F9E3 /* menu.h */; };
 /* End PBXBuildFile section */
@@ -129,8 +131,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				D8B39C1F1E8AEA470002F2EC /* settings.ini in CopyFiles */,
 				D8CFCCF21E76FCD20018CD32 /* menu.ini in CopyFiles */,
-				D8D74E851E5F198F008D0D13 /* settings.ini in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +159,7 @@
 		D8A5BC531E80384D00DCAA8D /* IClientEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IClientEntity.cpp; sourceTree = "<group>"; };
 		D8A5BC551E80430B00DCAA8D /* CBaseEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBaseEntity.h; sourceTree = "<group>"; };
 		D8AC47FA1E841D2D00EC0D94 /* CBaseClientState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBaseClientState.h; sourceTree = "<group>"; };
+		D8B39C1E1E8AEA400002F2EC /* settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = settings.ini; sourceTree = "<group>"; };
 		D8B6DC581E5C8EB000A14926 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		D8B6DC591E5C8EB000A14926 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		D8BBFF631E5EED690028DA53 /* ConvertUTF.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ConvertUTF.c; sourceTree = "<group>"; };
@@ -164,7 +167,6 @@
 		D8BBFF651E5EED690028DA53 /* settings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
 		D8BBFF661E5EED690028DA53 /* settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		D8BBFF671E5EED690028DA53 /* SimpleIni.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleIni.h; sourceTree = "<group>"; };
-		D8BBFF6D1E5EF55C0028DA53 /* settings.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = settings.ini; path = ../settings.ini; sourceTree = "<group>"; };
 		D8BDF70A1E895B820039C292 /* CCSGameRules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSGameRules.h; sourceTree = "<group>"; };
 		D8BDF70B1E8961690039C292 /* CCSWpnInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCSWpnInfo.h; sourceTree = "<group>"; };
 		D8BDFCC91E64805600F51DC0 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; wrapsLines = 0; };
@@ -172,6 +174,8 @@
 		D8C2CDAA1E7996E400314AB1 /* IGameUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGameUI.h; sourceTree = "<group>"; };
 		D8CFCCF11E76F6F00018CD32 /* menu.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menu.ini; sourceTree = "<group>"; };
 		D8D846541E7300ED00EA1BB7 /* KeyValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValues.h; sourceTree = "<group>"; };
+		D8D95F0C1E8CC252006A1A58 /* Aim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Aim.cpp; sourceTree = "<group>"; };
+		D8D95F0D1E8CC252006A1A58 /* Aim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aim.h; sourceTree = "<group>"; };
 		D8E1C3841E6851F800F2F9E3 /* menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = menu.cpp; sourceTree = "<group>"; wrapsLines = 0; };
 		D8E1C3851E6851F800F2F9E3 /* menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menu.h; sourceTree = "<group>"; };
 		D8E1C3901E68A0B800F2F9E3 /* IVGuiMatInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVGuiMatInfo.h; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 		D8E7A1131E5B889D00EC9750 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				D8B39C1E1E8AEA400002F2EC /* settings.ini */,
 				D8E7A1141E5B889D00EC9750 /* common.h */,
 				D8E7A1151E5B889D00EC9750 /* DrawManager */,
 				D8E7A1181E5B889D00EC9750 /* FeatureManager */,
@@ -351,7 +356,6 @@
 				D8E1C3881E68523300F2F9E3 /* MenuManager */,
 				D8E7A1321E5B889D00EC9750 /* NetvarManager */,
 				D8E7A13A1E5B889D00EC9750 /* PatternManager */,
-				D8BBFF6D1E5EF55C0028DA53 /* settings.ini */,
 				D8BBFF621E5EED690028DA53 /* SettingsManager */,
 				D8E7A13D1E5B889D00EC9750 /* WeaponManager */,
 			);
@@ -398,6 +402,8 @@
 				D8E7A1271E5B889D00EC9750 /* TriggerBot.h */,
 				D86F0AF51E839A050035EBA3 /* SkinChanger.cpp */,
 				D86F0AF61E839A050035EBA3 /* SkinChanger.h */,
+				D8D95F0C1E8CC252006A1A58 /* Aim.cpp */,
+				D8D95F0D1E8CC252006A1A58 /* Aim.h */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				D865FC5D1E5B88F7001434D3 /* draw.h in Headers */,
 				D865FC5E1E5B88F7001434D3 /* CreateMove.h in Headers */,
 				D865FC5F1E5B88F7001434D3 /* DrawModelExecute.h in Headers */,
+				D8D95F0F1E8CC252006A1A58 /* Aim.h in Headers */,
 				D865FC611E5B88F7001434D3 /* BunnyHop.h in Headers */,
 				D865FC621E5B88F7001434D3 /* Chams.h in Headers */,
 				D865FC641E5B88F7001434D3 /* TriggerBot.h in Headers */,
@@ -700,6 +707,7 @@
 				D86581BC1E5DEE4F001D33E8 /* FlashReducer.cpp in Sources */,
 				D865FCA91E5B8937001434D3 /* BunnyHop.cpp in Sources */,
 				D8A5BC541E80384D00DCAA8D /* IClientEntity.cpp in Sources */,
+				D8D95F0E1E8CC252006A1A58 /* Aim.cpp in Sources */,
 				D865FCAA1E5B8937001434D3 /* Chams.cpp in Sources */,
 				D88F3F021E5C0A8100C00A4A /* Esp.cpp in Sources */,
 				D8B6DC5A1E5C8EB000A14926 /* Logger.cpp in Sources */,

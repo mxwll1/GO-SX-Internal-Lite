@@ -4,9 +4,17 @@
 namespace FeatureManager {
     CBunnyHop* g_cBunnyHop = nullptr;
     CTriggerBot* g_cTriggerBot = nullptr;
+    CAim* g_cAim = nullptr;
 
     bool CreateMove(void* thisptr, float sample_input_frametime, CUserCmd* pCmd) {
         bool bRet = true;
+
+        if(INIGET_BOOL("AimHelper", "enabled")) {
+            if(!g_cAim) {
+                g_cAim = new CAim();
+            }
+            g_cAim->CreateMove(pCmd);
+        }
 
         if(INIGET_BOOL("Improvements", "bunnyhop")) {
             if (!g_cBunnyHop) {
